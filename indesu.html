@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart with Fireworks</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            transform: scale(1);
+            animation: fadeIn 2s ease-in-out forwards;
+            z-index: 1; /* Ensure the heart stays behind the text */
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .heart:before {
+            top: -150px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: 150px; /* Right circle shifted more */
+        }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px; /* Increased font size */
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0;
+            animation: textFadeIn 3s 2s forwards; /* Text fades in after 2s */
+            white-space: pre-line;
+            line-height: 1.4;
+            padding: 0 20px;
+            max-width: 260px; /* Limits the text width */
+            z-index: 2; /* Ensure text stays in front of the heart */
+        }
+
+        /* Animation for the heart fading in */
+        @keyframes fadeIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Animation for the text fading in */
+        @keyframes textFadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Firework effect styles */
+        .firework {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fireworkAnimation 0.5s ease-out forwards; /* Faster animation */
+        }
+
+        @keyframes fireworkAnimation {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-300px) scale(2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">
+        <div class="text">FEA Y NACA Y LILICULA</div>
+    </div>
+
+    <script>
+        // Function to create fireworks
+        function createFireworks() {
+            // Create 10 fireworks
+            for (let i = 0; i < 10; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                document.body.appendChild(firework);
+
+                // Set random delay for each firework
+                firework.style.animationDelay = `${Math.random() * 0.5 + 3}s`; // Fireworks start after 3 seconds
+
+                // Set random horizontal position for the fireworks
+                firework.style.left = `${Math.random() * 100 + 40}%`; // Random positions between 40%-140%
+            }
+        }
+
+        // Trigger fireworks after the text animation finishes (now after 3 seconds)
+        setTimeout(createFireworks, 3000); // Fireworks start after 3 seconds (sooner)
+    </script>
+</body>
+</html>
+
+
+
